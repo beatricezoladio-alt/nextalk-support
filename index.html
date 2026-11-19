@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nextalk – Support &amp; Boutique Officielle</title>
+    <title>Nextalk - L'application de messagerie et de commerce</title>
     <style>
         :root {
-            --bg: #0f172a;
-            --surface: #1e293b;
-            --surface-light: #334155;
             --primary: #2563eb;
             --primary-hover: #1d4ed8;
-            --accent: #10b981;
-            --text: #f8fafc;
-            --muted: #94a3b8;
-            --border: #334155;
+            --bg-light: #f8fafc;
+            --white: #ffffff;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --bot-bg: #f1f5f9;
+            --user-bg: #2563eb;
         }
 
         * {
@@ -25,305 +25,219 @@
         }
 
         body {
-            background-color: var(--bg);
-            color: var(--text);
+            background-color: var(--white);
+            color: var(--text-dark);
             line-height: 1.6;
-            min-height: 100vh;
             display: flex;
             flex-direction: column;
+            min-height: 100vh;
         }
 
+        /* HEADER */
         header {
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            background-color: var(--white);
             border-bottom: 1px solid var(--border);
-            padding: 18px 20px;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
             position: sticky;
             top: 0;
             z-index: 100;
         }
 
         .nav-container {
-            max-width: 960px;
-            margin: 0 auto;
+            width: 100%;
+            max-width: 1000px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 12px;
         }
 
         .brand {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
             display: flex;
             align-items: center;
             gap: 10px;
-            font-size: 1.35rem;
-            font-weight: 700;
-            color: #ffffff;
         }
 
-        .brand-badge {
-            background-color: var(--primary);
-            color: #fff;
-            font-size: 0.75rem;
-            padding: 3px 8px;
-            border-radius: 999px;
-            font-weight: 600;
+        .brand span {
+            color: var(--text-dark);
         }
 
-        .tabs {
-            display: flex;
-            gap: 8px;
-        }
-
-        .tab-btn {
-            background-color: var(--surface);
-            color: var(--text);
-            border: 1px solid var(--border);
-            padding: 8px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.92rem;
-            font-weight: 600;
-            transition: all 0.2s ease;
-        }
-
-        .tab-btn.active {
-            background-color: var(--primary);
-            border-color: var(--primary);
-            color: #ffffff;
-        }
-
+        /* MAIN LAYOUT */
         main {
-            max-width: 960px;
-            width: 100%;
-            margin: 24px auto;
-            padding: 0 16px;
             flex: 1;
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 40px 20px;
         }
 
-        .section {
-            display: none;
+        /* HERO SECTION */
+        .hero {
+            text-align: center;
+            margin-bottom: 50px;
         }
 
-        .section.active {
-            display: block;
-        }
-
-        .card {
-            background-color: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-        }
-
-        h1 {
-            font-size: 1.5rem;
-            margin-bottom: 8px;
-        }
-
-        h2 {
-            font-size: 1.2rem;
-            margin-bottom: 12px;
-            color: #ffffff;
-        }
-
-        p.subtitle {
-            color: var(--muted);
-            font-size: 0.95rem;
+        .hero h1 {
+            font-size: 2.5rem;
+            color: var(--text-dark);
             margin-bottom: 16px;
+            font-weight: 800;
         }
 
-        /* Chatbot UI */
-        .chat-box {
-            background-color: var(--bg);
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 30px auto;
+        }
+
+        .btn-download {
+            background-color: var(--primary);
+            color: var(--white);
+            text-decoration: none;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: background 0.2s;
+            display: inline-block;
+        }
+
+        .btn-download:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* CHATBOT SECTION */
+        .chatbot-container {
+            background-color: var(--white);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            height: 340px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .chatbot-header {
+            background-color: var(--text-dark);
+            color: var(--white);
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .chatbot-header .avatar {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .chatbot-header h3 {
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        .chatbot-header p {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            margin: 0;
+        }
+
+        .chat-window {
+            height: 400px;
             overflow-y: auto;
-            padding: 16px;
+            padding: 20px;
+            background-color: var(--bg-light);
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            margin-bottom: 14px;
+            gap: 16px;
         }
 
-        .msg {
-            max-width: 82%;
-            padding: 10px 14px;
+        .message {
+            max-width: 80%;
+            padding: 12px 16px;
             border-radius: 12px;
-            font-size: 0.94rem;
-            word-wrap: break-word;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            animation: fadeIn 0.3s ease;
         }
 
-        .msg.bot {
-            background-color: var(--surface-light);
-            color: var(--text);
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message.bot {
+            background-color: var(--white);
+            color: var(--text-dark);
             align-self: flex-start;
+            border: 1px solid var(--border);
             border-bottom-left-radius: 4px;
         }
 
-        .msg.user {
-            background-color: var(--primary);
-            color: #ffffff;
+        .message.user {
+            background-color: var(--user-bg);
+            color: var(--white);
             align-self: flex-end;
             border-bottom-right-radius: 4px;
         }
 
-        .quick-replies {
+        .chat-input-area {
             display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 14px;
-        }
-
-        .quick-btn {
-            background-color: var(--bg);
-            color: var(--text);
-            border: 1px solid var(--border);
-            padding: 6px 12px;
-            border-radius: 999px;
-            font-size: 0.85rem;
-            cursor: pointer;
-        }
-
-        .quick-btn:hover {
-            border-color: var(--primary);
-        }
-
-        .chat-input-row {
-            display: flex;
+            padding: 16px;
+            background-color: var(--white);
+            border-top: 1px solid var(--border);
             gap: 10px;
         }
 
-        input[type="text"],
-        select {
+        .chat-input-area input {
             flex: 1;
-            background-color: var(--bg);
-            color: var(--text);
+            padding: 14px 16px;
             border: 1px solid var(--border);
-            padding: 12px 14px;
-            border-radius: 10px;
-            font-size: 0.95rem;
+            border-radius: 8px;
+            font-size: 1rem;
             outline: none;
+            transition: border 0.2s;
         }
 
-        input[type="text"]:focus,
-        select:focus {
+        .chat-input-area input:focus {
             border-color: var(--primary);
         }
 
-        .btn-primary {
+        .chat-input-area button {
             background-color: var(--primary);
-            color: #ffffff;
+            color: var(--white);
             border: none;
-            padding: 12px 18px;
-            border-radius: 10px;
-            font-weight: 600;
-            font-size: 0.95rem;
+            padding: 0 24px;
+            border-radius: 8px;
+            font-weight: bold;
             cursor: pointer;
-            transition: background 0.2s ease;
+            font-size: 1rem;
+            transition: background 0.2s;
         }
 
-        .btn-primary:hover {
+        .chat-input-area button:hover {
             background-color: var(--primary-hover);
         }
 
-        .btn-accent {
-            background-color: var(--accent);
-            color: #06281e;
-            border: none;
-            padding: 12px 18px;
-            border-radius: 10px;
-            font-weight: 700;
-            font-size: 0.95rem;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 12px;
-        }
-
-        /* Boutique Soulier */
-        .product-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 18px;
-        }
-
-        .product-banner {
-            background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 24px;
-            text-align: center;
-        }
-
-        .shoe-icon {
-            font-size: 3.5rem;
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        .badge-stock {
-            display: inline-block;
-            background-color: rgba(16, 185, 129, 0.15);
-            color: var(--accent);
-            border: 1px solid var(--accent);
-            padding: 4px 12px;
-            border-radius: 999px;
-            font-size: 0.82rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-
-        .specs-list {
-            list-style: none;
-            margin: 14px 0;
-            display: grid;
-            gap: 8px;
-        }
-
-        .specs-list li {
-            background-color: var(--bg);
-            padding: 10px 14px;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-            font-size: 0.93rem;
-        }
-
-        .form-group {
-            margin-bottom: 12px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 0.88rem;
-            color: var(--muted);
-            margin-bottom: 6px;
-        }
-
-        .form-group input,
-        .form-group select {
-            width: 100%;
-        }
-
-        .order-feedback {
-            display: none;
-            margin-top: 14px;
-            padding: 14px;
-            border-radius: 10px;
-            background-color: rgba(16, 185, 129, 0.15);
-            border: 1px solid var(--accent);
-            color: #d1fae5;
-            font-size: 0.93rem;
-        }
-
+        /* FOOTER */
         footer {
             text-align: center;
-            padding: 18px;
-            color: var(--muted);
-            font-size: 0.85rem;
+            padding: 30px;
+            color: var(--text-muted);
             border-top: 1px solid var(--border);
+            font-size: 0.9rem;
         }
     </style>
 </head>
@@ -331,202 +245,130 @@
 
     <header>
         <div class="nav-container">
-            <div class="brand">
-                <span>Nexttalk</span>
-                <span class="brand-badge">Portail Officiel</span>
-            </div>
-            <div class="tabs">
-                <button class="tab-btn active" id="tab-support" onclick="switchTab('support')">Assistant Support</button>
-                <button class="tab-btn" id="tab-shop" onclick="switchTab('shop')">Boutique Souliers</button>
-            </div>
+            <div class="brand">Nextalk<span>.</span></div>
         </div>
     </header>
 
     <main>
-        <!-- SECTION 1 : ASSISTANT CHATBOT NEXTALK -->
-        <section id="section-support" class="section active">
-            <div class="card">
-                <h1>Assistant Virtuel Nextalk</h1>
-                <p class="subtitle">Posez vos questions sur l'application Nextalk, la traduction vocale, votre compte ou nos articles en vente à Lukala.</p>
-
-                <div class="quick-replies">
-                    <button class="quick-btn" onclick="sendQuick('Comment fonctionne Nextalk ?')">Comment fonctionne Nextalk ?</button>
-                    <button class="quick-btn" onclick="sendQuick('Traduction vocale')">Traduction vocale</button>
-                    <button class="quick-btn" onclick="sendQuick('Souliers en cuir noir')">Souliers en cuir noir</button>
-                    <button class="quick-btn" onclick="sendQuick('Livraison à Lukala')">Livraison à Lukala</button>
-                </div>
-
-                <div class="chat-box" id="chatBox">
-                    <div class="msg bot">
-                        Bonjour et bienvenue sur le portail officiel <strong>Nextalk</strong> ! Comment puis-je vous aider aujourd'hui ?
-                    </div>
-                </div>
-
-                <div class="chat-input-row">
-                    <input type="text" id="userInput" placeholder="Écrivez votre message ici..." onkeypress="handleKeyPress(event)" />
-                    <button class="btn-primary" onclick="sendMessage()">Envoyer</button>
-                </div>
-            </div>
+        <!-- SECTION ACCUEIL -->
+        <section class="hero">
+            <h1>Bienvenue sur Nextalk</h1>
+            <p>La messagerie sécurisée et la marketplace de confiance pour connecter et acheter en toute sécurité.</p>
+            <a href="#" class="btn-download">Télécharger l'application</a>
         </section>
 
-        <!-- SECTION 2 : BOUTIQUE SOULIER EN CUIR NOIR (LUKALA) -->
-        <section id="section-shop" class="section">
-            <div class="card">
-                <div class="product-grid">
-                    <div class="product-banner">
-                        <span class="shoe-icon">&#128094;</span>
-                        <span class="badge-stock">Disponible à Lukala (Kongo Central)</span>
-                        <h1>Soulier Classique en Cuir Noir</h1>
-                        <p class="subtitle">Finition élégante, semelle résistante et confort durable pour le bureau, les cérémonies et le quotidien.</p>
-                    </div>
-
-                    <div>
-                        <h2>Caractéristiques du produit</h2>
-                        <ul class="specs-list">
-                            <li><strong>Matière :</strong> Cuir noir véritable de haute qualité</li>
-                            <li><strong>Pointures disponibles :</strong> 40, 41, 42, 43, 44, 45</li>
-                            <li><strong>Zone de disponibilité :</strong> Lukala et environs (Kongo Central, RDC)</li>
-                            <li><strong>Paiement :</strong> À la livraison ou via mobile money</li>
-                        </ul>
-
-                        <h2>Passer une réservation rapide</h2>
-                        <div class="form-group">
-                            <label for="clientName">Votre nom complet</label>
-                            <input type="text" id="clientName" placeholder="Ex : Jean Mukendi" />
-                        </div>
-                        <div class="form-group">
-                            <label for="clientQuarter">Votre quartier / avenue à Lukala</label>
-                            <input type="text" id="clientQuarter" placeholder="Ex : Quartier Cité, Lukala" />
-                        </div>
-                        <div class="form-group">
-                            <label for="shoeSize">Pointure souhaitée</label>
-                            <select id="shoeSize">
-                                <option value="40">Pointure 40</option>
-                                <option value="41">Pointure 41</option>
-                                <option value="42" selected>Pointure 42</option>
-                                <option value="43">Pointure 43</option>
-                                <option value="44">Pointure 44</option>
-                                <option value="45">Pointure 45</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="clientPhone">Numéro de téléphone / WhatsApp</label>
-                            <input type="text" id="clientPhone" placeholder="Ex : +243 ..." />
-                        </div>
-
-                        <button class="btn-accent" onclick="submitOrder()">Confirmer ma demande de commande</button>
-
-                        <div class="order-feedback" id="orderFeedback"></div>
-                    </div>
+        <!-- SECTION CHATBOT -->
+        <section class="chatbot-container">
+            <div class="chatbot-header">
+                <div class="avatar">N</div>
+                <div>
+                    <h3>Assistant Nextalk</h3>
+                    <p>En ligne - Répond à vos questions</p>
                 </div>
+            </div>
+            
+            <div class="chat-window" id="chatWindow">
+                <div class="message bot">
+                    Bonjour ! Je suis l'assistant officiel de Nextalk. Que souhaitez-vous savoir sur l'application, la sécurité, ou comment acheter sur notre Marketplace ?
+                </div>
+            </div>
+
+            <div class="chat-input-area">
+                <input type="text" id="userInput" placeholder="Posez votre question ici..." onkeypress="handleKeyPress(event)" />
+                <button onclick="sendMessage()">Envoyer</button>
             </div>
         </section>
     </main>
 
     <footer>
-        &copy; 2026 Nexttalk — Support &amp; Commerce Local (Lukala, RDC)
+        &copy; 2026 Nextalk. Créé par Matumona Makiese Innocent. Tous droits réservés.
     </footer>
 
     <script>
-        function switchTab(tabName) {
-            document.getElementById("section-support").classList.remove("active");
-            document.getElementById("section-shop").classList.remove("active");
-            document.getElementById("tab-support").classList.remove("active");
-            document.getElementById("tab-shop").classList.remove("active");
+        // --- LOGIQUE DU CHATBOT ---
 
-            document.getElementById("section-" + tabName).classList.add("active");
-            document.getElementById("tab-" + tabName).classList.add("active");
-        }
+        const chatWindow = document.getElementById("chatWindow");
+        const userInput = document.getElementById("userInput");
 
+        // Fonction pour ajouter un message à l'écran
         function appendMessage(text, sender) {
-            var chatBox = document.getElementById("chatBox");
-            var div = document.createElement("div");
-            div.className = "msg " + sender;
-            div.innerHTML = text;
-            chatBox.appendChild(div);
-            chatBox.scrollTop = chatBox.scrollHeight;
+            const msgDiv = document.createElement("div");
+            msgDiv.className = `message ${sender}`;
+            // Permet d'afficher du texte en gras avec **texte**
+            msgDiv.innerHTML = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            chatWindow.appendChild(msgDiv);
+            chatWindow.scrollTop = chatWindow.scrollHeight;
         }
 
-        function getBotReply(message) {
-            var msg = message.toLowerCase();
-            if (msg.indexOf("traduction") !== -1 || msg.indexOf("langue") !== -1 || msg.indexOf("voix") !== -1) {
-                return "Nexttalk intègre la traduction vocale en temps réel entre le français, l'anglais, le lingala et plusieurs autres langues internationales.";
+        // Fonction pour générer la réponse du bot
+        function getBotResponse(message) {
+            const msg = message.toLowerCase();
+
+            // 1. Créateur / Développeur
+            if (msg.includes("créateur") || msg.includes("créé") || msg.includes("développeur") || msg.includes("fait") || msg.includes("matumona") || msg.includes("innocent")) {
+                return "Nextalk a été entièrement conçu et développé par **Matumona Makiese Innocent**. Il a travaillé d'arrache-pied pendant **2 mois et demi** pour créer l'application et le site web que vous voyez actuellement.";
             }
-            if (msg.indexOf("soulier") !== -1 || msg.indexOf("cuir") !== -1 || msg.indexOf("chaussure") !== -1) {
-                return "Nos souliers en cuir noir sont disponibles en pointures 40 à 45 à Lukala. Cliquez sur l'onglet <strong>Boutique Souliers</strong> en haut pour réserver votre paire.";
+
+            // 2. Comment acheter / Marketplace
+            if (msg.includes("acheter") || msg.includes("achat") || msg.includes("commander") || msg.includes("boutique") || msg.includes("marketplace") || msg.includes("vendre")) {
+                return "Pour acheter sur Nextalk, c'est très simple et 100% sécurisé :<br><br>1. Ouvrez l'onglet Marketplace.<br>2. Choisissez l'article qui vous plaît.<br>3. Payez via l'application (l'argent est bloqué en séquestre).<br>4. Le vendeur expédie l'article.<br>5. Une fois reçu et vérifié, cliquez sur 'Confirmer la réception'. L'argent est alors versé au vendeur.";
             }
-            if (msg.indexOf("lukala") !== -1 || msg.indexOf("livraison") !== -1 || msg.indexOf("quartier") !== -1) {
-                return "La remise en main propre et la livraison sont assurées dans tous les quartiers de Lukala (Kongo Central).";
+
+            // 3. Contact
+            if (msg.includes("contact") || msg.includes("email") || msg.includes("mail") || msg.includes("joindre") || msg.includes("parler") || msg.includes("écrire")) {
+                return "Vous pouvez contacter directement le créateur et l'équipe Nextalk par email à l'adresse suivante : **innocentmakiese930@gmail.com**. Nous vous répondrons dans les plus brefs délais.";
             }
-            if (msg.indexOf("nextalk") !== -1 || msg.indexOf("fonctionne") !== -1 || msg.indexOf("application") !== -1) {
-                return "Nextalk est une application mobile de messagerie, d'appels traduits et de commerce sécurisé pensée pour connecter les utilisateurs et vendeurs locaux.";
+
+            // 4. Sécurité / Coffre-fort
+            if (msg.includes("sécurité") || msg.includes("sécurisé") || msg.includes("coffre") || msg.includes("vault") || msg.includes("protégé") || msg.includes("empreinte")) {
+                return "La sécurité est notre priorité absolue. Nextalk intègre :<br>- Un **verrouillage biométrique** (empreinte digitale/FaceID).<br>- Un **Coffre-fort secret** protégé par code PIN pour cacher vos fichiers sensibles.<br>- Une **protection anti-capture d'écran**.<br>- Un système de **paiement sous séquestre** pour la marketplace.";
             }
-            if (msg.indexOf("bonjour") !== -1 || msg.indexOf("salut") !== -1 || msg.indexOf("bonsoir") !== -1) {
-                return "Bonjour ! Que souhaitez-vous consulter : l'assistance Nextalk ou notre boutique de souliers en cuir noir à Lukala ?";
+
+            // 5. Fonctionnalités générales
+            if (msg.includes("fonctionnalité") || msg.includes("fonctionne") || msg.includes("application") || msg.includes("app") || msg.includes("qu'est-ce")) {
+                return "Nextalk est une Super App qui combine :<br>- Une **messagerie** complète (texte, photos, vidéos, fichiers PDF).<br>- Une **Marketplace** avec paiement sécurisé (Séquestre).<br>- Un **Coffre-fort** numérique.<br>- Un **fil d'actualité** avec des Stories.<br>- Et bien plus encore !";
             }
-            return "Merci pour votre message ! Vous pouvez utiliser les boutons rapides ci-dessus ou ouvrir l'onglet <strong>Boutique Souliers</strong> pour passer une commande à Lukala.";
+
+            // 6. Messages éphémères
+            if (msg.includes("éphémère") || msg.includes("autodétruit") || msg.includes("disparaît") || msg.includes("secret")) {
+                return "Nextalk dispose d'un mode de **messages éphémères**. Vous pouvez configurer vos messages pour qu'ils s'autodétruisent automatiquement après un certain temps une fois qu'ils ont été lus par votre destinataire.";
+            }
+
+            // 7. Salutations
+            if (msg.includes("bonjour") || msg.includes("salut") || msg.includes("bonsoir") || msg.includes("hello")) {
+                return "Bonjour ! Comment puis-je vous aider à découvrir Nextalk aujourd'hui ? Vous pouvez me poser des questions sur les fonctionnalités, les paiements, ou le créateur de l'application.";
+            }
+
+            // 8. Remerciements
+            if (msg.includes("merci") || msg.includes("super") || msg.includes("génial") || msg.includes("ok")) {
+                return "Avec grand plaisir ! N'hésitez pas si vous avez d'autres questions. Vous pouvez aussi télécharger l'application pour commencer à l'utiliser.";
+            }
+
+            // Réponse par défaut si le bot ne comprend pas
+            return "Je ne suis pas sûr de bien comprendre votre question. Vous pouvez essayer de me demander : 'Qui a créé Nextalk ?', 'Comment acheter ?', ou 'Comment contacter le support ?'.";
         }
 
+        // Fonction pour envoyer le message
         function sendMessage() {
-            var input = document.getElementById("userInput");
-            var text = input.value.trim();
+            const text = userInput.value.trim();
             if (text === "") return;
 
-            appendMessage(escapeHtml(text), "user");
-            input.value = "";
+            // Afficher le message de l'utilisateur
+            appendMessage(text, "user");
+            userInput.value = "";
 
-            setTimeout(function () {
-                var reply = getBotReply(text);
-                appendMessage(reply, "bot");
-            }, 300);
+            // Simuler un temps de frappe pour le bot
+            setTimeout(() => {
+                const response = getBotResponse(text);
+                appendMessage(response, "bot");
+            }, 600);
         }
 
-        function sendQuick(text) {
-            document.getElementById("userInput").value = text;
-            sendMessage();
-        }
-
+        // Fonction pour gérer la touche Entrée
         function handleKeyPress(event) {
             if (event.key === "Enter") {
                 sendMessage();
             }
-        }
-
-        function submitOrder() {
-            var name = document.getElementById("clientName").value.trim();
-            var quarter = document.getElementById("clientQuarter").value.trim();
-            var size = document.getElementById("shoeSize").value;
-            var phone = document.getElementById("clientPhone").value.trim();
-            var feedback = document.getElementById("orderFeedback");
-
-            if (!name || !quarter || !phone) {
-                feedback.style.display = "block";
-                feedback.style.borderColor = "#f59e0b";
-                feedback.style.backgroundColor = "rgba(245, 158, 11, 0.15)";
-                feedback.style.color = "#fef3c7";
-                feedback.innerHTML = "Veuillez remplir votre nom, votre quartier à Lukala et votre numéro de téléphone avant de confirmer.";
-                return;
-            }
-
-            feedback.style.display = "block";
-            feedback.style.borderColor = "#10b981";
-            feedback.style.backgroundColor = "rgba(16, 185, 129, 0.15)";
-            feedback.style.color = "#d1fae5";
-            feedback.innerHTML =
-                "<strong>Demande enregistrée avec succès !</strong><br>" +
-                "Client : " + escapeHtml(name) + "<br>" +
-                "Article : Soulier en cuir noir — Pointure " + escapeHtml(size) + "<br>" +
-                "Quartier (Lukala) : " + escapeHtml(quarter) + "<br>" +
-                "Contact : " + escapeHtml(phone);
-        }
-
-        function escapeHtml(str) {
-            return str
-                .replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;")
-                .replace(/"/g, "&quot;")
-                .replace(/'/g, "&#039;");
         }
     </script>
 </body>
