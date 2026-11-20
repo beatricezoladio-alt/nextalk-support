@@ -32,6 +32,7 @@
             min-height: 100vh;
         }
 
+        /* HEADER PRINCIPAL */
         header {
             background-color: var(--white);
             border-bottom: 1px solid var(--border);
@@ -61,6 +62,21 @@
         }
 
         .brand span { color: var(--text-dark); }
+
+        /* LE VRAI LOGO DE NEXTALK */
+        .logo-circle {
+            width: 40px;
+            height: 40px;
+            background-color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--primary);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
 
         main {
             flex: 1;
@@ -107,12 +123,14 @@
             gap: 12px;
         }
 
+        /* Le logo dans le chatbot (blanc avec N bleu) */
         .chatbot-header .avatar {
             width: 40px; height: 40px;
-            background-color: var(--primary);
+            background-color: var(--white);
             border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
             font-weight: bold; font-size: 1.2rem;
+            color: var(--primary);
         }
 
         .chatbot-header h3 { font-size: 1.1rem; margin: 0; }
@@ -207,7 +225,11 @@
 
     <header>
         <div class="nav-container">
-            <div class="brand">Nextalk<span>.</span></div>
+            <!-- Modification du logo principal du header -->
+            <div class="brand">
+                <div class="logo-circle">N</div>
+                Nextalk<span>.</span>
+            </div>
         </div>
     </header>
 
@@ -220,6 +242,7 @@
 
         <section class="chatbot-container">
             <div class="chatbot-header">
+                <!-- Modification du logo du chatbot -->
                 <div class="avatar">N</div>
                 <div>
                     <h3>Assistant Nextalk</h3>
@@ -250,18 +273,17 @@
 
         // --- FONCTION POUR LIRE LE TEXTE À VOIX HAUTE (TTS) ---
         function speakText(text) {
-            // On vérifie si le navigateur supporte la synthèse vocale
             if ('speechSynthesis' in window) {
                 // On nettoie le texte pour enlever les balises HTML (<strong>, <br>, etc.)
                 let cleanText = text.replace(/<[^>]*>?/gm, '');
                 
                 let utterance = new SpeechSynthesisUtterance(cleanText);
-                utterance.lang = 'fr-FR'; // Voix française
-                utterance.rate = 1.0; // Vitesse normale
-                utterance.pitch = 1.0; // Tonalité normale
+                utterance.lang = 'fr-FR'; 
+                utterance.rate = 1.0; 
+                utterance.pitch = 1.0; 
                 
-                window.speechSynthesis.cancel(); // Stoppe la lecture précédente si elle existe
-                window.speechSynthesis.speak(utterance); // Lance la lecture
+                window.speechSynthesis.cancel(); 
+                window.speechSynthesis.speak(utterance); 
             }
         }
 
@@ -275,40 +297,36 @@
             if (sender === "user") {
                 msgDiv.innerHTML = text;
             } else {
-                // Effet de frappe pour le bot (mot par mot)
                 let words = text.split(" ");
                 let i = 0;
                 
                 let typingInterval = setInterval(() => {
                     if (i < words.length) {
-                        // On ajoute un mot à la fois
                         msgDiv.innerHTML += words[i] + " ";
                         chatWindow.scrollTop = chatWindow.scrollHeight;
                         i++;
                     } else {
-                        // Quand c'est fini, on nettoie le HTML final (pour le gras)
                         clearInterval(typingInterval);
                         let formattedText = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
                         msgDiv.innerHTML = formattedText;
                         chatWindow.scrollTop = chatWindow.scrollHeight;
                         
-                        // On lance la voix quand le texte est totalement écrit
+                        // Lecture vocale une fois le texte affiché
                         speakText(formattedText);
                     }
-                }, 80); // 80 millisecondes entre chaque mot (ajustez pour plus ou moins vite)
+                }, 80); 
             }
         }
 
-        // --- LE CERVEAU DU CHATBOT (DÉTECTION DES MOTS) ---
+        // --- LE CERVEAU DU CHATBOT ---
         function getBotResponse(message) {
             const msg = message.toLowerCase();
 
-            // Fonction pour vérifier les synonymes
             function hasWords(words) {
                 return words.some(word => msg.includes(word));
             }
 
-            // 1. DÉTAILS ET FONCTIONNALITÉS (Corrigé)
+            // 1. DÉTAILS ET FONCTIONNALITÉS
             if (hasWords(["toutes les fonctionnalités", "tout les fonctions", "écosystème", "ecosysteme", "tout détaillé", "tout les details", "tous les détails", "tous les details", "donne moi tout", "donne-moi tout", "presentation", "présentation", "explique tout", "explique moi", "c'est quoi nextalk", "qu'est-ce que nextalk", "que fait nextalk", "liste", "module", "avantage", "details", "détails", "detaille", "détaillé", "touts", "toutes"])) {
                 return `Nextalk est un écosystème complet qui regroupe :<br><br>
                 <ul>
@@ -398,15 +416,13 @@
             const text = userInput.value.trim();
             if (text === "") return;
 
-            // Afficher le message de l'utilisateur
             appendMessage(text, "user");
             userInput.value = "";
 
-            // Délai avant que le bot commence à répondre
             setTimeout(() => {
                 const response = getBotResponse(text);
                 appendMessage(response, "bot");
-            }, 800); // 0.8 seconde d'attente
+            }, 800); 
         }
 
         function handleKeyPress(event) {
