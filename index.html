@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nextalk - L'application de messagerie et de commerce</title>
+    <title>Nextalk - L'écosystème complet</title>
     <style>
         :root {
             --primary: #2563eb;
@@ -155,7 +155,7 @@
         }
 
         .chat-window {
-            height: 400px;
+            height: 450px;
             overflow-y: auto;
             padding: 20px;
             background-color: var(--bg-light);
@@ -165,8 +165,8 @@
         }
 
         .message {
-            max-width: 80%;
-            padding: 12px 16px;
+            max-width: 85%;
+            padding: 14px 18px;
             border-radius: 12px;
             font-size: 0.95rem;
             line-height: 1.5;
@@ -191,6 +191,17 @@
             color: var(--white);
             align-self: flex-end;
             border-bottom-right-radius: 4px;
+        }
+
+        /* Styles pour le texte riche dans le chat */
+        .message ul {
+            margin-left: 20px;
+            margin-top: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .message li {
+            margin-bottom: 4px;
         }
 
         .chat-input-area {
@@ -252,8 +263,8 @@
     <main>
         <!-- SECTION ACCUEIL -->
         <section class="hero">
-            <h1>Bienvenue sur Nextalk</h1>
-            <p>La messagerie sécurisée et la marketplace de confiance pour connecter et acheter en toute sécurité.</p>
+            <h1>Découvrez l'écosystème Nextalk</h1>
+            <p>La Super App qui combine messagerie ultra-sécurisée, réseau social et marketplace avec paiement sécurisé.</p>
             <a href="#" class="btn-download">Télécharger l'application</a>
         </section>
 
@@ -263,13 +274,13 @@
                 <div class="avatar">N</div>
                 <div>
                     <h3>Assistant Nextalk</h3>
-                    <p>En ligne - Répond à vos questions</p>
+                    <p>Posez-moi n'importe quelle question sur l'application</p>
                 </div>
             </div>
             
             <div class="chat-window" id="chatWindow">
                 <div class="message bot">
-                    Bonjour ! Je suis l'assistant officiel de Nextalk. Que souhaitez-vous savoir sur l'application, la sécurité, ou comment acheter sur notre Marketplace ?
+                    Bonjour ! Je suis l'assistant officiel de Nextalk. Je connais toutes les fonctionnalités de l'application. Que voulez-vous savoir ? (Par exemple : "Quelles sont les fonctionnalités ?", "Qui est le créateur ?", "Comment sécuriser mes messages ?")
                 </div>
             </div>
 
@@ -294,58 +305,100 @@
         function appendMessage(text, sender) {
             const msgDiv = document.createElement("div");
             msgDiv.className = `message ${sender}`;
-            // Permet d'afficher du texte en gras avec **texte**
-            msgDiv.innerHTML = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            // Permet d'afficher du texte en gras avec **texte** et de gérer les sauts de ligne
+            let formattedText = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            msgDiv.innerHTML = formattedText;
             chatWindow.appendChild(msgDiv);
             chatWindow.scrollTop = chatWindow.scrollHeight;
         }
 
-        // Fonction pour générer la réponse du bot
+        // Fonction intelligente pour trouver la réponse
         function getBotResponse(message) {
             const msg = message.toLowerCase();
 
-            // 1. Créateur / Développeur
-            if (msg.includes("créateur") || msg.includes("créé") || msg.includes("développeur") || msg.includes("fait") || msg.includes("matumona") || msg.includes("innocent")) {
-                return "Nextalk a été entièrement conçu et développé par **Matumona Makiese Innocent**. Il a travaillé d'arrache-pied pendant **2 mois et demi** pour créer l'application et le site web que vous voyez actuellement.";
+            // --- 1. TOUTES LES FONCTIONNALITÉS (L'ÉCOSYSTÈME COMPLET) ---
+            if (msg.includes("toutes les fonctionnalités") || msg.includes("tout les fonctions") || msg.includes("écosystème") || msg.includes("tout détaillé") || msg.includes("tout les details") || msg.includes("presentation")) {
+                return `Nextalk est un écosystème complet qui regroupe :<br><br>
+                <ul>
+                    <li><strong>Messagerie Sécurisée :</strong> Envoi de texte, photos, vidéos et fichiers lourds (PDF, ZIP). Messages programmés, réponses (quote) et messages épinglés.</li>
+                    <li><strong>Sécurité Maximale :</strong> Coffre-fort secret (Vault), verrouillage biométrique (empreinte), et protection anti-capture d'écran.</li>
+                    <li><strong>Confidentialité :</strong> Messages éphémères (qui s'autodétruisent), mode "Ne pas déranger", et thèmes de discussion personnalisables.</li>
+                    <li><strong>Réseau Social :</strong> Fil d'actualité (Feed) pour les publications, Stories de 24h, et gestion de profils avec abonnés/abonnements.</li>
+                    <li><strong>Marketplace Sécurisée :</strong> Création de boutiques, vente d'articles avec système de séquestre (Escrow), et gestion des litiges.</li>
+                    <li><strong>Communautés :</strong> Création de Groupes et de Pages officielles.</li>
+                    <li><strong>Monétisation :</strong> Système de publicités sponsorisées (5$ locale / 10$ globale) et espace d'administration pour gérer l'application.</li>
+                </ul>`;
             }
 
-            // 2. Comment acheter / Marketplace
-            if (msg.includes("acheter") || msg.includes("achat") || msg.includes("commander") || msg.includes("boutique") || msg.includes("marketplace") || msg.includes("vendre")) {
-                return "Pour acheter sur Nextalk, c'est très simple et 100% sécurisé :<br><br>1. Ouvrez l'onglet Marketplace.<br>2. Choisissez l'article qui vous plaît.<br>3. Payez via l'application (l'argent est bloqué en séquestre).<br>4. Le vendeur expédie l'article.<br>5. Une fois reçu et vérifié, cliquez sur 'Confirmer la réception'. L'argent est alors versé au vendeur.";
+            // --- 2. CRÉATEUR / PROPRIÉTAIRE ---
+            if (msg.includes("créateur") || msg.includes("créé") || msg.includes("développeur") || msg.includes("propriétaire") || msg.includes("patron") || msg.includes("boss") || msg.includes("qui a fait") || msg.includes("matumona") || msg.includes("innocent")) {
+                return "Le propriétaire et créateur de Nextalk est **Matumona Makiese Innocent**. Il a entièrement développé l'application mobile et ce site web. C'est le fruit d'un travail colossal de **2 mois et demi** de développement intensif.";
             }
 
-            // 3. Contact
-            if (msg.includes("contact") || msg.includes("email") || msg.includes("mail") || msg.includes("joindre") || msg.includes("parler") || msg.includes("écrire")) {
-                return "Vous pouvez contacter directement le créateur et l'équipe Nextalk par email à l'adresse suivante : **innocentmakiese930@gmail.com**. Nous vous répondrons dans les plus brefs délais.";
+            // --- 3. CONTACT ---
+            if (msg.includes("contact") || msg.includes("email") || msg.includes("mail") || msg.includes("joindre") || msg.includes("écrire") || msg.includes("parler") || msg.includes("support")) {
+                return "Pour contacter l'équipe ou le créateur directement, vous pouvez envoyer un email à : **innocentmakiese930@gmail.com**. Une réponse vous sera apportée dans les plus brefs délais.";
             }
 
-            // 4. Sécurité / Coffre-fort
-            if (msg.includes("sécurité") || msg.includes("sécurisé") || msg.includes("coffre") || msg.includes("vault") || msg.includes("protégé") || msg.includes("empreinte")) {
-                return "La sécurité est notre priorité absolue. Nextalk intègre :<br>- Un **verrouillage biométrique** (empreinte digitale/FaceID).<br>- Un **Coffre-fort secret** protégé par code PIN pour cacher vos fichiers sensibles.<br>- Une **protection anti-capture d'écran**.<br>- Un système de **paiement sous séquestre** pour la marketplace.";
+            // --- 4. SÉCURITÉ (Vault, Anti-capture, Biométrie) ---
+            if (msg.includes("sécurité") || msg.includes("sécurisé") || msg.includes("coffre") || msg.includes("vault") || msg.includes("protéger") || msg.includes("empreinte") || msg.includes("biométrie") || msg.includes("anti-capture") || msg.includes("capture")) {
+                return `Nextalk place la sécurité au premier plan :<br>
+                - <strong>Coffre-fort (Vault) :</strong> Un espace secret protégé par code PIN pour cacher vos fichiers sensibles.<br>
+                - <strong>Verrouillage Biométrique :</strong> L'application se verrouille avec votre empreinte digitale ou FaceID.<br>
+                - <strong>Anti-capture :</strong> Si quelqu'un essaie de faire une capture d'écran dans l'app, l'écran devient noir.<br>
+                - <strong>One-Tap Login :</strong> Reconnexion ultra-rapide et sécurisée sans retaper son mot de passe.`;
             }
 
-            // 5. Fonctionnalités générales
-            if (msg.includes("fonctionnalité") || msg.includes("fonctionne") || msg.includes("application") || msg.includes("app") || msg.includes("qu'est-ce")) {
-                return "Nextalk est une Super App qui combine :<br>- Une **messagerie** complète (texte, photos, vidéos, fichiers PDF).<br>- Une **Marketplace** avec paiement sécurisé (Séquestre).<br>- Un **Coffre-fort** numérique.<br>- Un **fil d'actualité** avec des Stories.<br>- Et bien plus encore !";
+            // --- 5. MESSAGERIE (Chat, éphémère, fichiers) ---
+            if (msg.includes("message") || msg.includes("chat") || msg.includes("discussion") || msg.includes("éphémère") || msg.includes("autodétruit") || msg.includes("fichier") || msg.includes("pdf")) {
+                return `Le système de messagerie de Nextalk est très complet :<br>
+                - <strong>Messages Éphémères :</strong> Envoyez des messages qui s'autodétruisent après lecture.<br>
+                - <strong>Fichiers Lourds :</strong> Partagez facilement des PDF, Word ou ZIP.<br>
+                - <strong>Thèmes :</strong> Personnalisez la couleur de vos discussions.<br>
+                - <strong>Mode Ne pas déranger :</strong> Coupez les notifications pour une conversation.<br>
+                - <strong>Messages Programmés :</strong> Écrivez un message et choisissez l'heure exacte de son envoi.<br>
+                - <strong>Épinglage :</strong> Gardez un message important en haut de la discussion.`;
             }
 
-            // 6. Messages éphémères
-            if (msg.includes("éphémère") || msg.includes("autodétruit") || msg.includes("disparaît") || msg.includes("secret")) {
-                return "Nextalk dispose d'un mode de **messages éphémères**. Vous pouvez configurer vos messages pour qu'ils s'autodétruisent automatiquement après un certain temps une fois qu'ils ont été lus par votre destinataire.";
+            // --- 6. RÉSEAU SOCIAL (Feed, Story, Groupes, Pages) ---
+            if (msg.includes("story") || msg.includes("stories") || msg.includes("feed") || msg.includes("fil") || msg.includes("actualité") || msg.includes("publication") || msg.includes("post") || msg.includes("groupe") || msg.includes("page") || msg.includes("abonné") || msg.includes("follower")) {
+                return `Nextalk intègre un véritable réseau social :<br>
+                - <strong>Stories :</strong> Partagez des photos ou vidéos qui disparaissent après 24 heures.<br>
+                - <strong>Fil d'actualité (Feed) :</strong> Publiez du contenu, likez, commentez et partagez les publications.<br>
+                - <strong>Groupes & Pages :</strong> Rejoignez des communautés ou créez votre propre page officielle.<br>
+                - <strong>Profil :</strong> Suivez vos amis et gérez vos abonnés/abonnements.`;
             }
 
-            // 7. Salutations
-            if (msg.includes("bonjour") || msg.includes("salut") || msg.includes("bonsoir") || msg.includes("hello")) {
-                return "Bonjour ! Comment puis-je vous aider à découvrir Nextalk aujourd'hui ? Vous pouvez me poser des questions sur les fonctionnalités, les paiements, ou le créateur de l'application.";
+            // --- 7. MARKETPLACE / ACHAT / VENTE ---
+            if (msg.includes("acheter") || msg.includes("achat") || msg.includes("commander") || msg.includes("boutique") || msg.includes("marketplace") || msg.includes("vendre") || msg.includes("vendeur") || msg.includes("litige") || msg.includes("séquestre") || msg.includes("5%")) {
+                return `La Marketplace de Nextalk est 100% sécurisée grâce au système de <strong>Séquestre (Escrow)</strong> :<br><br>
+                1. Un vendeur crée sa boutique et met un article en ligne.<br>
+                2. Un acheteur paie, mais <strong>l'argent est bloqué par Nextalk</strong> (il ne va pas directement au vendeur).<br>
+                3. Le vendeur expédie l'article.<br>
+                4. L'acheteur confirme la réception. L'argent est alors débloqué.<br><br>
+                Nextalk prélève automatiquement une <strong>commission de 5%</strong> sur chaque vente. En cas d'arnaque, l'acheteur peut ouvrir un <strong>litige</strong> et l'administrateur (le créateur) peut le rembourser.`;
             }
 
-            // 8. Remerciements
-            if (msg.includes("merci") || msg.includes("super") || msg.includes("génial") || msg.includes("ok")) {
-                return "Avec grand plaisir ! N'hésitez pas si vous avez d'autres questions. Vous pouvez aussi télécharger l'application pour commencer à l'utiliser.";
+            // --- 8. PUBLICITÉS & ADMINISTRATION ---
+            if (msg.includes("pub") || msg.includes("publicité") || msg.includes("sponsorisé") || msg.includes("admin") || msg.includes("administration")) {
+                return `Nextalk permet aux commerces locaux de faire de la publicité :<br>
+                - <strong>Publicité Locale :</strong> 5$ pour toucher les utilisateurs de votre pays pendant 7 jours.<br>
+                - <strong>Publicité Globale :</strong> 10$ pour une visibilité mondiale pendant 7 jours.<br><br>
+                Ces publicités sont gérées depuis un <strong>tableau de bord Administrateur</strong> caché (réservé uniquement au créateur de l'app) qui permet aussi de gérer les litiges et de bannir les utilisateurs malveillants.`;
             }
 
-            // Réponse par défaut si le bot ne comprend pas
-            return "Je ne suis pas sûr de bien comprendre votre question. Vous pouvez essayer de me demander : 'Qui a créé Nextalk ?', 'Comment acheter ?', ou 'Comment contacter le support ?'.";
+            // --- 9. SALUTATIONS ---
+            if (msg.includes("bonjour") || msg.includes("salut") || msg.includes("bonsoir") || msg.includes("hello") || msg.includes("coucou")) {
+                return "Bonjour ! Ravi de vous parler. Je suis l'assistant officiel de Nextalk. Vous pouvez me demander de vous expliquer toutes les fonctionnalités de l'application, comment acheter sur la marketplace, ou qui est le créateur. Que voulez-vous savoir ?";
+            }
+
+            // --- 10. REMERCIEMENTS ---
+            if (msg.includes("merci") || msg.includes("super") || msg.includes("génial") || msg.includes("parfait") || msg.includes("ok")) {
+                return "Avec grand plaisir ! Si vous avez d'autres questions sur l'écosystème Nextalk, n'hésitez pas. Vous pouvez aussi télécharger l'application pour commencer l'aventure.";
+            }
+
+            // --- RÉPONSE PAR DÉFAUT ---
+            return "Je ne suis pas certain de bien comprendre votre demande. Je suis programmé pour expliquer toutes les fonctionnalités de Nextalk. Vous pouvez essayer de me demander : <br>- 'Quelles sont toutes les fonctionnalités ?'<br>- 'Comment fonctionne la marketplace ?'<br>- 'Qui est le propriétaire ?'<br>- 'Comment contacter le support ?'";
         }
 
         // Fonction pour envoyer le message
