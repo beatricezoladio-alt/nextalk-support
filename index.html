@@ -13,7 +13,6 @@
             --text-dark: #0f172a;
             --text-muted: #64748b;
             --border: #e2e8f0;
-            --bot-bg: #f1f5f9;
             --user-bg: #2563eb;
         }
 
@@ -33,7 +32,6 @@
             min-height: 100vh;
         }
 
-        /* HEADER */
         header {
             background-color: var(--white);
             border-bottom: 1px solid var(--border);
@@ -62,11 +60,8 @@
             gap: 10px;
         }
 
-        .brand span {
-            color: var(--text-dark);
-        }
+        .brand span { color: var(--text-dark); }
 
-        /* MAIN LAYOUT */
         main {
             flex: 1;
             max-width: 1000px;
@@ -75,25 +70,9 @@
             padding: 40px 20px;
         }
 
-        /* HERO SECTION */
-        .hero {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            color: var(--text-dark);
-            margin-bottom: 16px;
-            font-weight: 800;
-        }
-
-        .hero p {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            max-width: 700px;
-            margin: 0 auto 30px auto;
-        }
+        .hero { text-align: center; margin-bottom: 50px; }
+        .hero h1 { font-size: 2.5rem; color: var(--text-dark); margin-bottom: 16px; font-weight: 800; }
+        .hero p { font-size: 1.1rem; color: var(--text-muted); max-width: 700px; margin: 0 auto 30px auto; }
 
         .btn-download {
             background-color: var(--primary);
@@ -107,11 +86,8 @@
             display: inline-block;
         }
 
-        .btn-download:hover {
-            background-color: var(--primary-hover);
-        }
+        .btn-download:hover { background-color: var(--primary-hover); }
 
-        /* CHATBOT SECTION */
         .chatbot-container {
             background-color: var(--white);
             border: 1px solid var(--border);
@@ -132,27 +108,15 @@
         }
 
         .chatbot-header .avatar {
-            width: 40px;
-            height: 40px;
+            width: 40px; height: 40px;
             background-color: var(--primary);
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1.2rem;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: bold; font-size: 1.2rem;
         }
 
-        .chatbot-header h3 {
-            font-size: 1.1rem;
-            margin: 0;
-        }
-
-        .chatbot-header p {
-            font-size: 0.85rem;
-            color: #94a3b8;
-            margin: 0;
-        }
+        .chatbot-header h3 { font-size: 1.1rem; margin: 0; }
+        .chatbot-header p { font-size: 0.85rem; color: #94a3b8; margin: 0; }
 
         .chat-window {
             height: 450px;
@@ -171,6 +135,7 @@
             font-size: 0.95rem;
             line-height: 1.5;
             animation: fadeIn 0.3s ease;
+            word-wrap: break-word;
         }
 
         @keyframes fadeIn {
@@ -193,16 +158,8 @@
             border-bottom-right-radius: 4px;
         }
 
-        /* Styles pour le texte riche dans le chat */
-        .message ul {
-            margin-left: 20px;
-            margin-top: 8px;
-            margin-bottom: 8px;
-        }
-        
-        .message li {
-            margin-bottom: 4px;
-        }
+        .message ul { margin-left: 20px; margin-top: 8px; margin-bottom: 8px; }
+        .message li { margin-bottom: 4px; }
 
         .chat-input-area {
             display: flex;
@@ -219,35 +176,24 @@
             border-radius: 8px;
             font-size: 1rem;
             outline: none;
-            transition: border 0.2s;
         }
 
-        .chat-input-area input:focus {
-            border-color: var(--primary);
-        }
+        .chat-input-area input:focus { border-color: var(--primary); }
 
-        /* BOUTON ENVOYER (FLÈCHE) */
         .chat-input-area button {
             background-color: var(--primary);
             color: var(--white);
             border: none;
-            width: 50px;
-            height: 50px;
+            width: 50px; height: 50px;
             border-radius: 8px;
             font-weight: bold;
             cursor: pointer;
             font-size: 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.2s;
+            display: flex; align-items: center; justify-content: center;
         }
 
-        .chat-input-area button:hover {
-            background-color: var(--primary-hover);
-        }
+        .chat-input-area button:hover { background-color: var(--primary-hover); }
 
-        /* FOOTER */
         footer {
             text-align: center;
             padding: 30px;
@@ -266,14 +212,12 @@
     </header>
 
     <main>
-        <!-- SECTION ACCUEIL -->
         <section class="hero">
             <h1>Découvrez l'écosystème Nextalk</h1>
             <p>La Super App qui combine messagerie ultra-sécurisée, réseau social et marketplace avec paiement sécurisé.</p>
             <a href="#" class="btn-download">Télécharger l'application</a>
         </section>
 
-        <!-- SECTION CHATBOT -->
         <section class="chatbot-container">
             <div class="chatbot-header">
                 <div class="avatar">N</div>
@@ -285,7 +229,7 @@
             
             <div class="chat-window" id="chatWindow">
                 <div class="message bot">
-                    Bonjour ! Je suis l'assistant officiel de Nextalk. Je connais toutes les fonctionnalités de l'application. Que voulez-vous savoir ? (Ex: "Détails des fonctionnalités", "Comment acheter ?", "Qui est le propriétaire ?")
+                    Bonjour ! Je suis l'assistant officiel de Nextalk. Je connais toutes les fonctionnalités de l'application. Que voulez-vous savoir ? (Ex: "Donne-moi tous les détails de Nextalk", "Comment acheter ?", "Qui est le propriétaire ?")
                 </div>
             </div>
 
@@ -301,37 +245,71 @@
     </footer>
 
     <script>
-        // --- LOGIQUE DU CHATBOT ---
-
         const chatWindow = document.getElementById("chatWindow");
         const userInput = document.getElementById("userInput");
 
-        // Fonction pour ajouter un message à l'écran
+        // --- FONCTION POUR LIRE LE TEXTE À VOIX HAUTE (TTS) ---
+        function speakText(text) {
+            // On vérifie si le navigateur supporte la synthèse vocale
+            if ('speechSynthesis' in window) {
+                // On nettoie le texte pour enlever les balises HTML (<strong>, <br>, etc.)
+                let cleanText = text.replace(/<[^>]*>?/gm, '');
+                
+                let utterance = new SpeechSynthesisUtterance(cleanText);
+                utterance.lang = 'fr-FR'; // Voix française
+                utterance.rate = 1.0; // Vitesse normale
+                utterance.pitch = 1.0; // Tonalité normale
+                
+                window.speechSynthesis.cancel(); // Stoppe la lecture précédente si elle existe
+                window.speechSynthesis.speak(utterance); // Lance la lecture
+            }
+        }
+
+        // --- FONCTION POUR AFFICHER LE MESSAGE AVEC EFFET DE FRAPPE ---
         function appendMessage(text, sender) {
             const msgDiv = document.createElement("div");
             msgDiv.className = `message ${sender}`;
-            let formattedText = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-            msgDiv.innerHTML = formattedText;
             chatWindow.appendChild(msgDiv);
             chatWindow.scrollTop = chatWindow.scrollHeight;
+
+            if (sender === "user") {
+                msgDiv.innerHTML = text;
+            } else {
+                // Effet de frappe pour le bot (mot par mot)
+                let words = text.split(" ");
+                let i = 0;
+                
+                let typingInterval = setInterval(() => {
+                    if (i < words.length) {
+                        // On ajoute un mot à la fois
+                        msgDiv.innerHTML += words[i] + " ";
+                        chatWindow.scrollTop = chatWindow.scrollHeight;
+                        i++;
+                    } else {
+                        // Quand c'est fini, on nettoie le HTML final (pour le gras)
+                        clearInterval(typingInterval);
+                        let formattedText = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                        msgDiv.innerHTML = formattedText;
+                        chatWindow.scrollTop = chatWindow.scrollHeight;
+                        
+                        // On lance la voix quand le texte est totalement écrit
+                        speakText(formattedText);
+                    }
+                }, 80); // 80 millisecondes entre chaque mot (ajustez pour plus ou moins vite)
+            }
         }
 
-        // Fonction intelligente pour trouver la réponse (MASSIVE SYNONYMS)
+        // --- LE CERVEAU DU CHATBOT (DÉTECTION DES MOTS) ---
         function getBotResponse(message) {
             const msg = message.toLowerCase();
 
-            // Fonction utilitaire pour vérifier si un des mots est présent
+            // Fonction pour vérifier les synonymes
             function hasWords(words) {
                 return words.some(word => msg.includes(word));
             }
 
-            // --- 1. CRÉATEUR / PROPRIÉTAIRE ---
-            if (hasWords(["créateur", "créé", "création", "développeur", "développement", "propriétaire", "proprietaire", "patron", "boss", "fondateur", "concepteur", "inventeur", "auteur", "qui a fait", "qui a développé", "qui appartient", "appartient", "matumona", "innocent", "makiese"])) {
-                return "Le propriétaire et créateur de Nextalk est **Matumona Makiese Innocent**. Il a entièrement développé l'application mobile et ce site web. C'est le fruit d'un travail colossal de **2 mois et demi** de développement intensif.";
-            }
-
-            // --- 2. TOUTES LES FONCTIONNALITÉS (GLOBAL) ---
-            if (hasWords(["toutes les fonctionnalités", "tout les fonctions", "écosystème", "ecosysteme", "tout détaillé", "tout les details", "tous les détails", "presentation", "présentation", "explique tout", "explique moi", "c'est quoi nextalk", "qu'est-ce que nextalk", "que fait nextalk", "liste", "module", "avantage"])) {
+            // 1. DÉTAILS ET FONCTIONNALITÉS (Corrigé)
+            if (hasWords(["toutes les fonctionnalités", "tout les fonctions", "écosystème", "ecosysteme", "tout détaillé", "tout les details", "tous les détails", "tous les details", "donne moi tout", "donne-moi tout", "presentation", "présentation", "explique tout", "explique moi", "c'est quoi nextalk", "qu'est-ce que nextalk", "que fait nextalk", "liste", "module", "avantage", "details", "détails", "detaille", "détaillé", "touts", "toutes"])) {
                 return `Nextalk est un écosystème complet qui regroupe :<br><br>
                 <ul>
                     <li><strong>Messagerie Sécurisée :</strong> Envoi de texte, photos, vidéos et fichiers lourds (PDF, ZIP). Messages programmés, réponses (quote) et messages épinglés.</li>
@@ -344,7 +322,12 @@
                 </ul>`;
             }
 
-            // --- 3. MARKETPLACE / ACHAT / VENTE ---
+            // 2. CRÉATEUR
+            if (hasWords(["créateur", "créé", "création", "développeur", "développement", "propriétaire", "proprietaire", "patron", "boss", "fondateur", "concepteur", "inventeur", "auteur", "qui a fait", "qui a développé", "qui appartient", "appartient", "matumona", "innocent", "makiese"])) {
+                return "Le propriétaire et créateur de Nextalk est **Matumona Makiese Innocent**. Il a entièrement développé l'application mobile et ce site web. C'est le fruit d'un travail colossal de **2 mois et demi** de développement intensif.";
+            }
+
+            // 3. MARKETPLACE
             if (hasWords(["acheter", "achat", "achete", "vendre", "vente", "vendeur", "commander", "commande", "boutique", "magasin", "marketplace", "article", "produit", "panier", "payer", "paiement", "séquestre", "sequestre", "escrow", "litige", "arnaqué", "arnaquer", "remboursement", "rembourser", "commission", "5%", "5 %", "transaction"])) {
                 return `La Marketplace de Nextalk est 100% sécurisée grâce au système de <strong>Séquestre (Escrow)</strong> :<br><br>
                 1. Un vendeur crée sa boutique et met un article en ligne.<br>
@@ -354,7 +337,7 @@
                 Nextalk prélève automatiquement une <strong>commission de 5%</strong> sur chaque vente. En cas d'arnaque, l'acheteur peut ouvrir un <strong>litige</strong> et l'administrateur (le créateur) peut le rembourser.`;
             }
 
-            // --- 4. SÉCURITÉ (Vault, Anti-capture, Biométrie) ---
+            // 4. SÉCURITÉ
             if (hasWords(["sécurité", "securite", "sécurisé", "securise", "coffre", "vault", "cacher", "caché", "protéger", "proteger", "empreinte", "biométrie", "biometrie", "faceid", "pin", "code secret", "anti-capture", "anticapture", "capture", "pirater", "piratage", "verrou"])) {
                 return `Nextalk place la sécurité au premier plan :<br>
                 - <strong>Coffre-fort (Vault) :</strong> Un espace secret protégé par code PIN pour cacher vos fichiers sensibles.<br>
@@ -363,7 +346,7 @@
                 - <strong>One-Tap Login :</strong> Reconnexion ultra-rapide et sécurisée sans retaper son mot de passe.`;
             }
 
-            // --- 5. MESSAGERIE (Chat, éphémère, fichiers) ---
+            // 5. MESSAGERIE
             if (hasWords(["message", "messages", "chat", "discussion", "discuter", "parler", "éphémère", "ephemere", "autodétruit", "autodetruit", "disparaître", "disparaitre", "fichier", "pdf", "word", "zip", "document", "envoyer", "thème", "theme", "épingler", "epingler", "quote", "répondre", "repondre", "programmé", "programme"])) {
                 return `Le système de messagerie de Nextalk est très complet :<br>
                 - <strong>Messages Éphémères :</strong> Envoyez des messages qui s'autodétruisent après lecture.<br>
@@ -374,7 +357,7 @@
                 - <strong>Épinglage & Quote :</strong> Gardez un message important en haut ou répondez-lui directement.`;
             }
 
-            // --- 6. RÉSEAU SOCIAL (Feed, Story, Groupes, Pages) ---
+            // 6. RÉSEAU SOCIAL
             if (hasWords(["story", "stories", "feed", "fil", "actualité", "actualite", "publication", "post", "poster", "publier", "groupe", "groupes", "page", "pages", "abonné", "abonne", "follower", "ami", "amis", "réseau", "reseau", "social"])) {
                 return `Nextalk intègre un véritable réseau social :<br>
                 - <strong>Stories :</strong> Partagez des photos ou vidéos qui disparaissent après 24 heures.<br>
@@ -383,7 +366,7 @@
                 - <strong>Profil :</strong> Suivez vos amis et gérez vos abonnés/abonnements.`;
             }
 
-            // --- 7. PUBLICITÉS & ADMINISTRATION ---
+            // 7. PUBLICITÉS
             if (hasWords(["pub", "pubs", "publicité", "publicite", "sponsorisé", "sponsorise", "admin", "administration", "administrateur", "gérer", "gerer", "modération", "moderation", "bannir", "bannissement"])) {
                 return `Nextalk permet aux commerces locaux de faire de la publicité :<br>
                 - <strong>Publicité Locale :</strong> 5$ pour toucher les utilisateurs de votre pays pendant 7 jours.<br>
@@ -391,26 +374,26 @@
                 Ces publicités sont gérées depuis un <strong>tableau de bord Administrateur</strong> caché (réservé uniquement au créateur de l'app) qui permet aussi de gérer les litiges et de bannir les utilisateurs malveillants.`;
             }
 
-            // --- 8. CONTACT / SUPPORT ---
+            // 8. CONTACT
             if (hasWords(["contact", "contacter", "email", "e-mail", "mail", "joindre", "parler au support", "aide", "aider", "problème", "probleme", "bug", "erreur", "signaler"])) {
                 return "Pour contacter l'équipe ou le créateur directement, vous pouvez envoyer un email à : **innocentmakiese930@gmail.com**. Une réponse vous sera apportée dans les plus brefs délais.";
             }
 
-            // --- 9. SALUTATIONS ---
+            // 9. SALUTATIONS
             if (hasWords(["bonjour", "salut", "bonsoir", "hello", "coucou", "hey", "yo"])) {
                 return "Bonjour ! Ravi de vous parler. Je suis l'assistant officiel de Nextalk. Vous pouvez me demander de vous expliquer toutes les fonctionnalités de l'application, comment acheter sur la marketplace, ou qui est le créateur. Que voulez-vous savoir ?";
             }
 
-            // --- 10. REMERCIEMENTS ---
+            // 10. REMERCIEMENTS
             if (hasWords(["merci", "super", "génial", "genial", "parfait", "d'accord", "ok", "compris", "bien"])) {
                 return "Avec grand plaisir ! Si vous avez d'autres questions sur l'écosystème Nextalk, n'hésitez pas. Vous pouvez aussi télécharger l'application pour commencer l'aventure.";
             }
 
-            // --- RÉPONSE PAR DÉFAUT ---
+            // RÉPONSE PAR DÉFAUT
             return "Je n'ai pas bien compris votre question. Je suis programmé pour expliquer toutes les fonctionnalités de Nextalk. Vous pouvez essayer de me demander : <br>- 'Donne-moi tous les détails de Nextalk'<br>- 'Comment faire un achat ?'<br>- 'Qui est le propriétaire ?'<br>- 'Comment sécuriser mon compte ?'";
         }
 
-        // Fonction pour envoyer le message
+        // --- FONCTIONS D'ENVOI ---
         function sendMessage() {
             const text = userInput.value.trim();
             if (text === "") return;
@@ -419,14 +402,13 @@
             appendMessage(text, "user");
             userInput.value = "";
 
-            // Simuler un temps de frappe pour le bot
+            // Délai avant que le bot commence à répondre
             setTimeout(() => {
                 const response = getBotResponse(text);
                 appendMessage(response, "bot");
-            }, 600);
+            }, 800); // 0.8 seconde d'attente
         }
 
-        // Fonction pour gérer la touche Entrée
         function handleKeyPress(event) {
             if (event.key === "Enter") {
                 sendMessage();
