@@ -226,15 +226,20 @@
             border-color: var(--primary);
         }
 
+        /* BOUTON ENVOYER (FLÈCHE) */
         .chat-input-area button {
             background-color: var(--primary);
             color: var(--white);
             border: none;
-            padding: 0 24px;
+            width: 50px;
+            height: 50px;
             border-radius: 8px;
             font-weight: bold;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             transition: background 0.2s;
         }
 
@@ -280,13 +285,13 @@
             
             <div class="chat-window" id="chatWindow">
                 <div class="message bot">
-                    Bonjour ! Je suis l'assistant officiel de Nextalk. Je connais toutes les fonctionnalités de l'application. Que voulez-vous savoir ? (Par exemple : "Quelles sont les fonctionnalités ?", "Qui est le créateur ?", "Comment sécuriser mes messages ?")
+                    Bonjour ! Je suis l'assistant officiel de Nextalk. Je connais toutes les fonctionnalités de l'application. Que voulez-vous savoir ? (Ex: "Détails des fonctionnalités", "Comment acheter ?", "Qui est le propriétaire ?")
                 </div>
             </div>
 
             <div class="chat-input-area">
                 <input type="text" id="userInput" placeholder="Posez votre question ici..." onkeypress="handleKeyPress(event)" />
-                <button onclick="sendMessage()">Envoyer</button>
+                <button onclick="sendMessage()">➤</button>
             </div>
         </section>
     </main>
@@ -305,19 +310,28 @@
         function appendMessage(text, sender) {
             const msgDiv = document.createElement("div");
             msgDiv.className = `message ${sender}`;
-            // Permet d'afficher du texte en gras avec **texte** et de gérer les sauts de ligne
             let formattedText = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
             msgDiv.innerHTML = formattedText;
             chatWindow.appendChild(msgDiv);
             chatWindow.scrollTop = chatWindow.scrollHeight;
         }
 
-        // Fonction intelligente pour trouver la réponse
+        // Fonction intelligente pour trouver la réponse (MASSIVE SYNONYMS)
         function getBotResponse(message) {
             const msg = message.toLowerCase();
 
-            // --- 1. TOUTES LES FONCTIONNALITÉS (L'ÉCOSYSTÈME COMPLET) ---
-            if (msg.includes("toutes les fonctionnalités") || msg.includes("tout les fonctions") || msg.includes("écosystème") || msg.includes("tout détaillé") || msg.includes("tout les details") || msg.includes("presentation")) {
+            // Fonction utilitaire pour vérifier si un des mots est présent
+            function hasWords(words) {
+                return words.some(word => msg.includes(word));
+            }
+
+            // --- 1. CRÉATEUR / PROPRIÉTAIRE ---
+            if (hasWords(["créateur", "créé", "création", "développeur", "développement", "propriétaire", "proprietaire", "patron", "boss", "fondateur", "concepteur", "inventeur", "auteur", "qui a fait", "qui a développé", "qui appartient", "appartient", "matumona", "innocent", "makiese"])) {
+                return "Le propriétaire et créateur de Nextalk est **Matumona Makiese Innocent**. Il a entièrement développé l'application mobile et ce site web. C'est le fruit d'un travail colossal de **2 mois et demi** de développement intensif.";
+            }
+
+            // --- 2. TOUTES LES FONCTIONNALITÉS (GLOBAL) ---
+            if (hasWords(["toutes les fonctionnalités", "tout les fonctions", "écosystème", "ecosysteme", "tout détaillé", "tout les details", "tous les détails", "presentation", "présentation", "explique tout", "explique moi", "c'est quoi nextalk", "qu'est-ce que nextalk", "que fait nextalk", "liste", "module", "avantage"])) {
                 return `Nextalk est un écosystème complet qui regroupe :<br><br>
                 <ul>
                     <li><strong>Messagerie Sécurisée :</strong> Envoi de texte, photos, vidéos et fichiers lourds (PDF, ZIP). Messages programmés, réponses (quote) et messages épinglés.</li>
@@ -326,51 +340,12 @@
                     <li><strong>Réseau Social :</strong> Fil d'actualité (Feed) pour les publications, Stories de 24h, et gestion de profils avec abonnés/abonnements.</li>
                     <li><strong>Marketplace Sécurisée :</strong> Création de boutiques, vente d'articles avec système de séquestre (Escrow), et gestion des litiges.</li>
                     <li><strong>Communautés :</strong> Création de Groupes et de Pages officielles.</li>
-                    <li><strong>Monétisation :</strong> Système de publicités sponsorisées (5$ locale / 10$ globale) et espace d'administration pour gérer l'application.</li>
+                    <li><strong>Monétisation :</strong> Système de publicités sponsorisées (5$ locale / 10$ globale) et espace d'administration.</li>
                 </ul>`;
             }
 
-            // --- 2. CRÉATEUR / PROPRIÉTAIRE ---
-            if (msg.includes("créateur") || msg.includes("créé") || msg.includes("développeur") || msg.includes("propriétaire") || msg.includes("patron") || msg.includes("boss") || msg.includes("qui a fait") || msg.includes("matumona") || msg.includes("innocent")) {
-                return "Le propriétaire et créateur de Nextalk est **Matumona Makiese Innocent**. Il a entièrement développé l'application mobile et ce site web. C'est le fruit d'un travail colossal de **2 mois et demi** de développement intensif.";
-            }
-
-            // --- 3. CONTACT ---
-            if (msg.includes("contact") || msg.includes("email") || msg.includes("mail") || msg.includes("joindre") || msg.includes("écrire") || msg.includes("parler") || msg.includes("support")) {
-                return "Pour contacter l'équipe ou le créateur directement, vous pouvez envoyer un email à : **innocentmakiese930@gmail.com**. Une réponse vous sera apportée dans les plus brefs délais.";
-            }
-
-            // --- 4. SÉCURITÉ (Vault, Anti-capture, Biométrie) ---
-            if (msg.includes("sécurité") || msg.includes("sécurisé") || msg.includes("coffre") || msg.includes("vault") || msg.includes("protéger") || msg.includes("empreinte") || msg.includes("biométrie") || msg.includes("anti-capture") || msg.includes("capture")) {
-                return `Nextalk place la sécurité au premier plan :<br>
-                - <strong>Coffre-fort (Vault) :</strong> Un espace secret protégé par code PIN pour cacher vos fichiers sensibles.<br>
-                - <strong>Verrouillage Biométrique :</strong> L'application se verrouille avec votre empreinte digitale ou FaceID.<br>
-                - <strong>Anti-capture :</strong> Si quelqu'un essaie de faire une capture d'écran dans l'app, l'écran devient noir.<br>
-                - <strong>One-Tap Login :</strong> Reconnexion ultra-rapide et sécurisée sans retaper son mot de passe.`;
-            }
-
-            // --- 5. MESSAGERIE (Chat, éphémère, fichiers) ---
-            if (msg.includes("message") || msg.includes("chat") || msg.includes("discussion") || msg.includes("éphémère") || msg.includes("autodétruit") || msg.includes("fichier") || msg.includes("pdf")) {
-                return `Le système de messagerie de Nextalk est très complet :<br>
-                - <strong>Messages Éphémères :</strong> Envoyez des messages qui s'autodétruisent après lecture.<br>
-                - <strong>Fichiers Lourds :</strong> Partagez facilement des PDF, Word ou ZIP.<br>
-                - <strong>Thèmes :</strong> Personnalisez la couleur de vos discussions.<br>
-                - <strong>Mode Ne pas déranger :</strong> Coupez les notifications pour une conversation.<br>
-                - <strong>Messages Programmés :</strong> Écrivez un message et choisissez l'heure exacte de son envoi.<br>
-                - <strong>Épinglage :</strong> Gardez un message important en haut de la discussion.`;
-            }
-
-            // --- 6. RÉSEAU SOCIAL (Feed, Story, Groupes, Pages) ---
-            if (msg.includes("story") || msg.includes("stories") || msg.includes("feed") || msg.includes("fil") || msg.includes("actualité") || msg.includes("publication") || msg.includes("post") || msg.includes("groupe") || msg.includes("page") || msg.includes("abonné") || msg.includes("follower")) {
-                return `Nextalk intègre un véritable réseau social :<br>
-                - <strong>Stories :</strong> Partagez des photos ou vidéos qui disparaissent après 24 heures.<br>
-                - <strong>Fil d'actualité (Feed) :</strong> Publiez du contenu, likez, commentez et partagez les publications.<br>
-                - <strong>Groupes & Pages :</strong> Rejoignez des communautés ou créez votre propre page officielle.<br>
-                - <strong>Profil :</strong> Suivez vos amis et gérez vos abonnés/abonnements.`;
-            }
-
-            // --- 7. MARKETPLACE / ACHAT / VENTE ---
-            if (msg.includes("acheter") || msg.includes("achat") || msg.includes("commander") || msg.includes("boutique") || msg.includes("marketplace") || msg.includes("vendre") || msg.includes("vendeur") || msg.includes("litige") || msg.includes("séquestre") || msg.includes("5%")) {
+            // --- 3. MARKETPLACE / ACHAT / VENTE ---
+            if (hasWords(["acheter", "achat", "achete", "vendre", "vente", "vendeur", "commander", "commande", "boutique", "magasin", "marketplace", "article", "produit", "panier", "payer", "paiement", "séquestre", "sequestre", "escrow", "litige", "arnaqué", "arnaquer", "remboursement", "rembourser", "commission", "5%", "5 %", "transaction"])) {
                 return `La Marketplace de Nextalk est 100% sécurisée grâce au système de <strong>Séquestre (Escrow)</strong> :<br><br>
                 1. Un vendeur crée sa boutique et met un article en ligne.<br>
                 2. Un acheteur paie, mais <strong>l'argent est bloqué par Nextalk</strong> (il ne va pas directement au vendeur).<br>
@@ -379,26 +354,60 @@
                 Nextalk prélève automatiquement une <strong>commission de 5%</strong> sur chaque vente. En cas d'arnaque, l'acheteur peut ouvrir un <strong>litige</strong> et l'administrateur (le créateur) peut le rembourser.`;
             }
 
-            // --- 8. PUBLICITÉS & ADMINISTRATION ---
-            if (msg.includes("pub") || msg.includes("publicité") || msg.includes("sponsorisé") || msg.includes("admin") || msg.includes("administration")) {
+            // --- 4. SÉCURITÉ (Vault, Anti-capture, Biométrie) ---
+            if (hasWords(["sécurité", "securite", "sécurisé", "securise", "coffre", "vault", "cacher", "caché", "protéger", "proteger", "empreinte", "biométrie", "biometrie", "faceid", "pin", "code secret", "anti-capture", "anticapture", "capture", "pirater", "piratage", "verrou"])) {
+                return `Nextalk place la sécurité au premier plan :<br>
+                - <strong>Coffre-fort (Vault) :</strong> Un espace secret protégé par code PIN pour cacher vos fichiers sensibles.<br>
+                - <strong>Verrouillage Biométrique :</strong> L'application se verrouille avec votre empreinte digitale ou FaceID.<br>
+                - <strong>Anti-capture :</strong> Si quelqu'un essaie de faire une capture d'écran dans l'app, l'écran devient noir.<br>
+                - <strong>One-Tap Login :</strong> Reconnexion ultra-rapide et sécurisée sans retaper son mot de passe.`;
+            }
+
+            // --- 5. MESSAGERIE (Chat, éphémère, fichiers) ---
+            if (hasWords(["message", "messages", "chat", "discussion", "discuter", "parler", "éphémère", "ephemere", "autodétruit", "autodetruit", "disparaître", "disparaitre", "fichier", "pdf", "word", "zip", "document", "envoyer", "thème", "theme", "épingler", "epingler", "quote", "répondre", "repondre", "programmé", "programme"])) {
+                return `Le système de messagerie de Nextalk est très complet :<br>
+                - <strong>Messages Éphémères :</strong> Envoyez des messages qui s'autodétruisent après lecture.<br>
+                - <strong>Fichiers Lourds :</strong> Partagez facilement des PDF, Word ou ZIP.<br>
+                - <strong>Thèmes :</strong> Personnalisez la couleur de vos discussions.<br>
+                - <strong>Mode Ne pas déranger :</strong> Coupez les notifications pour une conversation.<br>
+                - <strong>Messages Programmés :</strong> Écrivez un message et choisissez l'heure exacte de son envoi.<br>
+                - <strong>Épinglage & Quote :</strong> Gardez un message important en haut ou répondez-lui directement.`;
+            }
+
+            // --- 6. RÉSEAU SOCIAL (Feed, Story, Groupes, Pages) ---
+            if (hasWords(["story", "stories", "feed", "fil", "actualité", "actualite", "publication", "post", "poster", "publier", "groupe", "groupes", "page", "pages", "abonné", "abonne", "follower", "ami", "amis", "réseau", "reseau", "social"])) {
+                return `Nextalk intègre un véritable réseau social :<br>
+                - <strong>Stories :</strong> Partagez des photos ou vidéos qui disparaissent après 24 heures.<br>
+                - <strong>Fil d'actualité (Feed) :</strong> Publiez du contenu, likez, commentez et partagez les publications.<br>
+                - <strong>Groupes & Pages :</strong> Rejoignez des communautés ou créez votre propre page officielle.<br>
+                - <strong>Profil :</strong> Suivez vos amis et gérez vos abonnés/abonnements.`;
+            }
+
+            // --- 7. PUBLICITÉS & ADMINISTRATION ---
+            if (hasWords(["pub", "pubs", "publicité", "publicite", "sponsorisé", "sponsorise", "admin", "administration", "administrateur", "gérer", "gerer", "modération", "moderation", "bannir", "bannissement"])) {
                 return `Nextalk permet aux commerces locaux de faire de la publicité :<br>
                 - <strong>Publicité Locale :</strong> 5$ pour toucher les utilisateurs de votre pays pendant 7 jours.<br>
                 - <strong>Publicité Globale :</strong> 10$ pour une visibilité mondiale pendant 7 jours.<br><br>
                 Ces publicités sont gérées depuis un <strong>tableau de bord Administrateur</strong> caché (réservé uniquement au créateur de l'app) qui permet aussi de gérer les litiges et de bannir les utilisateurs malveillants.`;
             }
 
+            // --- 8. CONTACT / SUPPORT ---
+            if (hasWords(["contact", "contacter", "email", "e-mail", "mail", "joindre", "parler au support", "aide", "aider", "problème", "probleme", "bug", "erreur", "signaler"])) {
+                return "Pour contacter l'équipe ou le créateur directement, vous pouvez envoyer un email à : **innocentmakiese930@gmail.com**. Une réponse vous sera apportée dans les plus brefs délais.";
+            }
+
             // --- 9. SALUTATIONS ---
-            if (msg.includes("bonjour") || msg.includes("salut") || msg.includes("bonsoir") || msg.includes("hello") || msg.includes("coucou")) {
+            if (hasWords(["bonjour", "salut", "bonsoir", "hello", "coucou", "hey", "yo"])) {
                 return "Bonjour ! Ravi de vous parler. Je suis l'assistant officiel de Nextalk. Vous pouvez me demander de vous expliquer toutes les fonctionnalités de l'application, comment acheter sur la marketplace, ou qui est le créateur. Que voulez-vous savoir ?";
             }
 
             // --- 10. REMERCIEMENTS ---
-            if (msg.includes("merci") || msg.includes("super") || msg.includes("génial") || msg.includes("parfait") || msg.includes("ok")) {
+            if (hasWords(["merci", "super", "génial", "genial", "parfait", "d'accord", "ok", "compris", "bien"])) {
                 return "Avec grand plaisir ! Si vous avez d'autres questions sur l'écosystème Nextalk, n'hésitez pas. Vous pouvez aussi télécharger l'application pour commencer l'aventure.";
             }
 
             // --- RÉPONSE PAR DÉFAUT ---
-            return "Je ne suis pas certain de bien comprendre votre demande. Je suis programmé pour expliquer toutes les fonctionnalités de Nextalk. Vous pouvez essayer de me demander : <br>- 'Quelles sont toutes les fonctionnalités ?'<br>- 'Comment fonctionne la marketplace ?'<br>- 'Qui est le propriétaire ?'<br>- 'Comment contacter le support ?'";
+            return "Je n'ai pas bien compris votre question. Je suis programmé pour expliquer toutes les fonctionnalités de Nextalk. Vous pouvez essayer de me demander : <br>- 'Donne-moi tous les détails de Nextalk'<br>- 'Comment faire un achat ?'<br>- 'Qui est le propriétaire ?'<br>- 'Comment sécuriser mon compte ?'";
         }
 
         // Fonction pour envoyer le message
